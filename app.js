@@ -1,10 +1,8 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-const bodyParser = require('body-parser');
-const winston = require('winston');
-const expressWinston = require('express-winston');
-const path = require('path')
-const dbPath = path.resolve(__dirname, 'library.db')
+import bodyParser from 'body-parser';
+import winston from 'winston';
+import expressWinston from 'express-winston';
 
 //middleware
 app.use(bodyParser.json());
@@ -21,7 +19,7 @@ app.use(expressWinston.logger({
   colorize: false // Color the text and status code, using the Express/morgan color palette (text: gray, status: default green, 3XX cyan, 4XX yellow, 5XX red).
 }))
 
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database(dbPath);
+import routes from './src/routes';
+routes(app);
 
 app.listen(3001);
