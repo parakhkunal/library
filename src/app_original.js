@@ -19,7 +19,6 @@ app.use(expressWinston.logger({
   colorize: false // Color the text and status code, using the Express/morgan color palette (text: gray, status: default green, 3XX cyan, 4XX yellow, 5XX red).
 }))
 
-import routes from './src/routes';
-routes(app);
+app.use('/services', routes);
 
 app.listen(3001);

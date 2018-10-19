@@ -2,8 +2,10 @@
   "name": "library",
   "version": "1.0.0",
   "description": "A simple Node Library with SQLite DB",
-  "main": "app.js",
+  "main": "dist/server.js",
   "scripts": {
+    "build": "mkdir -p dist && babel src -s -D -d dist",
+    "serve": "nodemon --exec babel-node src/server.js",
     "test": "npm run test"
   },
   "repository": {
@@ -17,12 +19,23 @@
   },
   "homepage": "https://github.com/parakhkunal/library#readme",
   "dependencies": {
+    "bluebird": "^3.5.2",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "express-sanitizer": "^1.0.4",
     "express-validator": "^5.3.0",
     "express-winston": "^2.4.0",
+    "nodemon": "1.17.5",
     "sqlite3": "^4.0.2",
     "uniqid": "^5.0.3",
     "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
   }
 }

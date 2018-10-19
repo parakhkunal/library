@@ -62,3 +62,8 @@ typings/
 
 # temporary file used by sqliite
 *.db-journal
+
+# babel compiled code
+dist
+
+.DS_Store

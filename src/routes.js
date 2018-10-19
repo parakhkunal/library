@@ -1,50 +1,56 @@
-import {check, validationResult} from 'express-validator/check';
+import { Router } from 'express';
+import { check, validationResult } from 'express-validator/check';
 
-export default app => {
-  const user = require('./controllers/user');
-  const book = require('./controllers/book');
+import { createUser } from './controllers/user';
+import { createBook } from './controllers/book';
+import { addBookToUserLibrary } from './controllers/userLibrary';
 
-  app.route('/user')
-  	.post(user.createUser);
+const routes = Router();
 
-  app.route('/book')
-  	.post(book.createBook);
+routes.post('/user', [
+    check('first_name').trim().escape().isAlphanumeric(),
+    check('last_name').trim().escape().isAlphanumeric(),
+], (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+        createUser(req, res);
+    } catch (exception) {
+        res.status(500).send({ error: req });
+    }
+});
+
+routes.post('/book', [
+    check('author').trim().escape().isString(),
+    check('title').trim().escape().isString(),
+], (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+        createBook(req, res);
+    } catch (exception) {
+        res.status(500).send({ error: req });
+    }
+});
+
+routes.post('/addToLibrary', [
+    check('user_id').trim().escape().isNumeric(),
+    check('book_id').trim().escape().isNumeric(),
+], (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+        addBookToUserLibrary(req, res);
+    } catch (exception) {
+        res.status(500).send({ error: req });
+    }
+});
 
 
-  app.route('/test', [
-	  // username must be an email
-	  check('first_name').isLength({ min: 5 }),
-	  // password must be at least 5 chars long
-	  check('last_name').isLength({ min: 5 })
-	], (req, res) => {
-	  // Finds the validation errors in this request and wraps them in an object with handy functions
-	  const errors = validationResult(req);
-	  if (!errors.isEmpty()) {
-	    return res.status(422).json({ errors: errors.array() });
-	  }
-
-	  // User.create({
-	  //   username: req.body.username,
-	  //   password: req.body.password
-	  // }).then(user => res.json(user));
-	}).post(user.createUser);
-
-
-  app.post('/test1', [
-	  // username must be an email
-	  check('username').isEmail(),
-	  // password must be at least 5 chars long
-	  check('password').isLength({ min: 5 })
-	], (req, res) => {
-	  // Finds the validation errors in this request and wraps them in an object with handy functions
-	  const errors = validationResult(req);
-	  if (!errors.isEmpty()) {
-	    return res.status(422).json({ errors: errors.array() });
-	  }
-
-	  // User.create({
-	  //   username: req.body.username,
-	  //   password: req.body.password
-	  // }).then(user => res.json(user));
-	});
-};
+export default routes;

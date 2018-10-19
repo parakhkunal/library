@@ -1,30 +1,41 @@
 import uniqid from 'uniqid';
 import path from 'path';
-const dbPath = path.resolve(__dirname, '../../db/library.db');
 
+const dbPath = path.resolve(__dirname, '../../db/library.db');
 const sqlite3 = require('sqlite3').verbose();
+
 const db = new sqlite3.Database(dbPath);
 
 function getUser(userId) {
-    let sql = `SELECT * FROM users WHERE user_id = ?`;
+    const sql = 'SELECT * FROM users WHERE user_id = ?';
     db.get(sql, [userId], (err, row) => {
         if (err) {
             return console.error(err.message);
-          }
-          return row
+        }
+        return row;
     });
 }
 
+/**
+ *
+ * @param {*} req input request object
+ * @param {*} res
+ */
 export function createUser(req, res) {
-    let sql = `INSERT INTO users values (?, ?, ?, ?)`;
-    db.run(sql, [null, uniqid(req.body.first_name), req.body.first_name, req.body.last_name], function(err) {
+    const sql = 'INSERT INTO users values (?, ?, ?, ?, ?)';
+    db.run(sql, [null, uniqid(req.body.first_name), req.body.first_name, req.body.last_name, new Date().toUTCString()], (err) => {
         if (err) {
-            console.err(err);
-            res.status(500);
+            res.status(err.status || 500).send({ Error: err.message });
         } else {
-            res.json(getUser(this.lastID))
             res.status(202);
         }
         res.end();
+    });
+}
+
+export function createUserwithPromise(req, res) {
+    const sql = 'INSERT INTO users values (?, ?, ?, ?)';
+    db.run(sql, [null, uniqid(req.body.first_name), req.body.first_name, req.body.last_name]).then(() => {
+        console.log('Here');
     });
 }
