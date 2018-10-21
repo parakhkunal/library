@@ -176,7 +176,7 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "http://localhost:3001/services/user/43/book/3/operation/1",
+							"raw": "http://localhost:3001/services/user/44/book/7/operation/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -185,9 +185,9 @@
 							"path": [
 								"services",
 								"user",
-								"43",
+								"44",
 								"book",
-								"3",
+								"7",
 								"operation",
 								"1"
 							]
@@ -206,7 +206,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:3001/services/user/43/book/3",
+							"raw": "http://localhost:3001/services/user/60/book/17",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -215,9 +215,9 @@
 							"path": [
 								"services",
 								"user",
-								"43",
+								"60",
 								"book",
-								"3"
+								"17"
 							]
 						},
 						"description": "Delete a book from user's library"
@@ -228,14 +228,7 @@
 					"name": "Fetch User's Book Collection",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
@@ -262,14 +255,7 @@
 					"name": "Fetch User's Unread Book Collection",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
@@ -302,14 +288,7 @@
 					"name": "Fetch User's Read Book Collection",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
@@ -342,14 +321,7 @@
 					"name": "Fetch User's Book Collection By Author",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
