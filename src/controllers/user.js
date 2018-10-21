@@ -8,7 +8,7 @@ import { standardErrorResponse, customErrorResponse } from '../helpers/libraryHe
  * @param {*} req input request object
  * @param {*} res
  */
-export function createUser(req, res) {
+export const createUser = (req, res) => {
     db.run(queries.user.create, [null, uniqid(), req.body.first_name, req.body.last_name, new Date().toUTCString()], function(err) { // eslint-disable-line no-undef
         if (err) {
             standardErrorResponse(res, err, err.message);
@@ -24,7 +24,7 @@ export function createUser(req, res) {
  * @param {*} req input request object
  * @param {*} res
  */
-export function getUser(req, res) {
+export const getUser = (req, res) => {
     db.get(queries.user.get, [req.params.user_id], (err, user) => { // eslint-disable-line no-undef
         if (err) {
             standardErrorResponse(res, err, err.message);

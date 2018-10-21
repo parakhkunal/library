@@ -9,7 +9,7 @@ import {
  * @param {*} req
  * @param {*} res
  */
-export function addBookToUserLibrary(req, res) {
+export const addBookToUserLibrary = (req, res) => {
     let isUserFound,
         isBookFound = false;
     doesEntryExist(req.params.user_id, 'user', (data) => {
@@ -46,7 +46,7 @@ export function addBookToUserLibrary(req, res) {
  * @param {*} req
  * @param {*} res
  */
-export function updateBookReadStatus(req, res) {
+export const updateBookReadStatus = (req, res) => {
     doesLibraryEntryExist(req.params.user_id, req.params.book_id, (data) => {
         if (data) {
             db.run(queries.library.updateBookReadStatus, [req.params.mark_as_read, req.params.user_id, req.params.book_id], (err) => { // eslint-disable-line no-undef
@@ -68,7 +68,7 @@ export function updateBookReadStatus(req, res) {
  * @param {*} req
  * @param {*} res
  */
-export function deleteBookFromUserLibrary(req, res) {
+export const deleteBookFromUserLibrary = (req, res) => {
     doesLibraryEntryExist(req.params.user_id, req.params.book_id, (data) => {
         if (data) {
             db.run(queries.library.deleteBookFromUserLibrary, [req.params.user_id, req.params.book_id], (err) => { // eslint-disable-line no-undef
@@ -90,7 +90,7 @@ export function deleteBookFromUserLibrary(req, res) {
  * @param {*} req
  * @param {*} res
  */
-export function getUserBooks(req, res) {
+export const getUserBooks = (req, res) => {
     const filter = req.query.filter || '';
     let sql = queries.library.getAllUserBooks;
     if (filter.length) {

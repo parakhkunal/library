@@ -7,7 +7,7 @@ import { standardErrorResponse, customErrorResponse } from '../helpers/libraryHe
  * @param {*} req
  * @param {*} res
  */
-export function createBook(req, res) {
+export const createBook = (req, res) => {
     db.run(queries.book.create, [null, req.body.author, req.body.title, new Date().toUTCString()], function(err) { // eslint-disable-line no-undef
         if (err) {
             standardErrorResponse(res, err, err.message);
@@ -23,7 +23,7 @@ export function createBook(req, res) {
  * @param {*} req
  * @param {*} res
  */
-export function getBook(req, res) {
+export const getBook = (req, res) => {
     db.get(queries.book.get, [req.params.book_id], (err, book) => { // eslint-disable-line no-undef
         if (err) {
             standardErrorResponse(res, err, err.message);

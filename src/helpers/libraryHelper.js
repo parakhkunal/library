@@ -7,7 +7,7 @@ import queries from '../../db/queries.json';
  * @param {string} schema - Table name
  * @callback {*} callback
  */
-export function doesEntryExist(id, schema, callback) {
+export const doesEntryExist = (id, schema, callback) => {
     let isFound = false;
     const sql = schema === 'user' ? queries.user.checkUserExists : queries.book.checkBookExists;
     db.get(sql, [id], (err, row) => { // eslint-disable-line no-undef
@@ -24,7 +24,7 @@ export function doesEntryExist(id, schema, callback) {
  * @param {number} bookId - Lookup book_id for the library table
  * @callback {*} callback
  */
-export function doesLibraryEntryExist(userId, bookId, callback) {
+export const doesLibraryEntryExist = (userId, bookId, callback) => {
     let isFound = false;
     db.get(queries.library.checkUserLibraryExists, [userId, bookId], (err, row) => { // eslint-disable-line no-undef
         if (!err && row !== undefined) {
@@ -39,17 +39,17 @@ export function doesLibraryEntryExist(userId, bookId, callback) {
  * @param {array} response - Input array to be grouped
  * @param {*} key - groupping key
  */
-export function groupResponseByKey(response, key) {
+export const groupResponseByKey = (response, key) => {
     return groupBy(response, key);
 }
 
 /**
  * Standard response formatter for errors
- * @param {*} req
+ * @param {*} res
  * @param {Object} err - Error object
  * @param {string} message - Message to be sent
  */
-export function standardErrorResponse(res, err, message) {
+export const standardErrorResponse = (res, err, message) => {
     res.status(err.status || 500).send({ Error: message });
 }
 
@@ -58,7 +58,7 @@ export function standardErrorResponse(res, err, message) {
  * @param {*} res
  * @param {*} message - Message to be sent
  */
-export function customErrorResponse(res, message) {
+export const customErrorResponse = (res, message) => {
     res.status(404).send({ Error: message });
 }
 
@@ -67,6 +67,6 @@ export function customErrorResponse(res, message) {
  * @param {*} res
  * @param {*} exception - Caught exception to be returned
  */
-export function standardExceptionResponse(res, exception) {
+export const standardExceptionResponse = (res, exception) => {
     res.status(500).send({ Error: exception.message });
 }
