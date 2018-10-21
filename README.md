@@ -98,3 +98,4 @@ A simple Node Library API with SQLite DB.
 2.  Implement Repository Pattern for database interactions
 3.  Adding database schema validations
 4.  Git Hooks to run tests before pushing code to remote
+5.  Improved code coverage
