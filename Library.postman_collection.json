@@ -1,0 +1,380 @@
+{
+	"info": {
+		"_postman_id": "9fe61ec5-ee1f-461f-9651-6afd834073a8",
+		"name": "Library",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"first_name\": \"Maria$$$\",\n\t\"last_name\": \"Nelson\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/services/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"services",
+								"user"
+							]
+						},
+						"description": "Creates a user with unique username"
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch User Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/services/user/466",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"services",
+								"user",
+								"466"
+							]
+						},
+						"description": "Get User Details"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "Create Book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"author\": \"George Orwell\",\n\t\"title\": \"Nineteen Eighty Four\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/services/book",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"services",
+								"book"
+							]
+						},
+						"description": "Creates a book with author and title"
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Book Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/services/book/17",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"services",
+								"book",
+								"17"
+							]
+						},
+						"description": "Get Book Details"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Library",
+			"item": [
+				{
+					"name": "Add Book to User's Library",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"book_id\": 16,\n\t\"user_id\": 44\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/services/addToLibrary",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"services",
+								"addToLibrary"
+							]
+						},
+						"description": "Create a map of book and user"
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Book As Read or Unread",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3001/services/updateBookReadStatus/111/operation/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"services",
+								"updateBookReadStatus",
+								"111",
+								"operation",
+								"1"
+							]
+						},
+						"description": "Mark a book as read or unread for the user"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Book from User's Library",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/services/deleteBookFromLibrary/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"services",
+								"deleteBookFromLibrary",
+								"11"
+							]
+						},
+						"description": "Delete a book from user's library"
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch User's Book Collection",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/services/getUserBooks/44",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"services",
+								"getUserBooks",
+								"44"
+							]
+						},
+						"description": "Get all the books from a user's library"
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch User's Unread Book Collection",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/services/getUserBooks/44?filter=unread",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"services",
+								"getUserBooks",
+								"44"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "unread"
+								}
+							]
+						},
+						"description": "Get all the books from a user's library which are unread"
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch User's Read Book Collection",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/services/getUserBooks/44?filter=read",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"services",
+								"getUserBooks",
+								"44"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "read"
+								}
+							]
+						},
+						"description": "Get all the books from a user's library which are read"
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch User's Book Collection By Author",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/services/getUserBooks/44?filter=author",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"services",
+								"getUserBooks",
+								"44"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "author"
+								}
+							]
+						},
+						"description": "Get all the books from a user's library by author"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
