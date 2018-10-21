@@ -9,9 +9,7 @@ import {
 import { standardExceptionResponse } from './helpers/libraryHelper';
 
 const routes = Router();
-routes.get('/', function (req, res) {
-  res.send('Wiki home page');
-});
+
 /**
  * @api {post} /user Save user information
  * @apiName createUser
@@ -74,7 +72,7 @@ routes.post('/user', [
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *          "result": {
+ *          "user": {
  *              "user_id": 43,
  *              "username": "Random29l9b4eppjngz0743",
  *              "first_name": "Random",
@@ -166,7 +164,7 @@ routes.post('/book', [
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *          "result": {
+ *          "book": {
  *              "book_id": 43,
  *              "author": "Test",
  *              "title": "Test",
@@ -312,15 +310,15 @@ routes.delete('/user/:user_id/book/:book_id', [
 });
 
 /**
- * @api {get} /user/:user_id/books?filter=read Get user's books from the Library
+ * @api {get} /user/:user_id/books?filter=:value Get user's books from the Library
  * @apiName getUserBooks
  * @apiGroup Library
  *
  * @apiParam {Number} user_id User ID of the user.
  * @apiParam {String} [filter] Optional queryparam returns user's library collection by books read, unread and by authors.
- *                             filter=read - Returns only read books,
- *                             filter=unread - Returns only unread books,
- *                             filter=author - Returns unique author books.
+ *                             filter = read - Returns only read books,
+ *                             filter = unread - Returns only unread books,
+ *                             filter = author - Returns unique author books.
  *
  * @apiSuccess {Number} book_id Book ID of the book
  * @apiSuccess {String} author Author of the book

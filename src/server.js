@@ -22,3 +22,5 @@ process.on('SIGINT', () => {
     db.close(); // eslint-disable-line no-undef
     server.close();
 });
+
+module.exports = app; // for testing

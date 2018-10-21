@@ -6,7 +6,7 @@
   "scripts": {
     "build": "mkdir -p dist && babel src -s -D -d dist",
     "serve": "nodemon --exec babel-node src/server.js",
-    "test": "jest"
+    "test": "nyc node_modules/mocha/bin/mocha --require babel-core/register --exit"
   },
   "repository": {
     "type": "git",
@@ -25,20 +25,22 @@
     "express-winston": "2.4.0",
     "lodash.groupby": "4.6.0",
     "nodemon": "1.17.5",
+    "nyc": "13.1.0",
     "sqlite3": "4.0.2",
-    "supertest": "3.3.0",
     "uniqid": "5.0.3",
     "winston": "2.4.0"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
+    "babel-core": "6.26.3",
     "babel-preset-env": "1.7.0",
     "babel-register": "6.26.0",
     "chai": "4.2.0",
+    "chai-http": "4.2.0",
+    "coffeescript": "2.3.2",
     "eslint": "5.7.0",
     "eslint-config-airbnb-base": "13.1.0",
     "eslint-plugin-import": "2.14.0",
-    "jest": "23.6.0",
     "mocha": "5.2.0"
   }
 }

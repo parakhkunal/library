@@ -6,11 +6,13 @@ import routes from './routes';
 
 const app = express();
 
+// Logger as a middleware for all the routes
 app.use(expressWinston.logger({
     transports: [
         new winston.transports.Console({
             json: true,
             colorize: true,
+            silent: process.env.NODE_ENV === 'test',
         }),
     ],
     meta: true, // optional: control whether you want to log the meta data about the request (default to true)
@@ -22,23 +24,7 @@ app.use(expressWinston.logger({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/ping', (req, res) => {
-    res.send('pong');
-});
-
-// Routes
+// Use /services as a prefix for all Routes
 app.use('/services', routes);
-
-// Catch 404 and forward to error handler
-app.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
-// Error handler
-app.use((err, req, res) => {
-    res.status(err.status || 500).send(err.message);
-});
 
 export default app;

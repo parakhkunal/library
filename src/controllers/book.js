@@ -24,11 +24,11 @@ export function createBook(req, res) {
  * @param {*} res
  */
 export function getBook(req, res) {
-    db.get(queries.book.get, [req.params.book_id], (err, result) => { // eslint-disable-line no-undef
+    db.get(queries.book.get, [req.params.book_id], (err, book) => { // eslint-disable-line no-undef
         if (err) {
             standardErrorResponse(res, err, err.message);
-        } else if (result !== undefined) {
-            res.status(200).send({ result });
+        } else if (book !== undefined) {
+            res.status(200).send({ book });
         } else {
             customErrorResponse(res, messages.failure.BOOK_NOT_FOUND);
         }

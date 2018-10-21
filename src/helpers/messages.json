@@ -9,6 +9,6 @@
 		"USER_OR_BOOK_NOT_FOUND": "User or Book not found.",
 		"BOOK_ALREADY_ISSUED": "The book is already issued to a user.",
 		"LIBRARY_ENTRY_NOT_FOUND": "Library entry not found.",
-		"NO_RECORDS_FOUND": "No Records found for the user in library."
+		"NO_RECORDS_FOUND": "No records found for the user in library."
 	}
 }

@@ -120,7 +120,7 @@
 							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3001/services/book/17",
+							"raw": "http://localhost:3001/services/book/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -129,7 +129,7 @@
 							"path": [
 								"services",
 								"book",
-								"17"
+								"3"
 							]
 						},
 						"description": "Get Book Details"
@@ -176,7 +176,7 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "http://localhost:3001/services/user/44/book/7/operation/1",
+							"raw": "http://localhost:3001/services/user/45/book/8/operation/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -185,9 +185,9 @@
 							"path": [
 								"services",
 								"user",
-								"44",
+								"45",
 								"book",
-								"7",
+								"8",
 								"operation",
 								"1"
 							]
