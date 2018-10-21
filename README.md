@@ -46,7 +46,7 @@ A simple Node Library API with SQLite DB.
 
 2.  Relationship Diagram of the tables supporting the project -
     
-        ![alt text](https://github.com/parakhkunal/library/blob/master/library_relationship_diagram.png)
+        ![alt text](https://raw.githubusercontent.com/parakhkunal/library/master/library_relationship_diagram.png)
       
 
 ## Functionalities Supported:
