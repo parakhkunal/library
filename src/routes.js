@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { check } from 'express-validator/check';
+import { validationResult, check } from 'express-validator/check';
 
 import { createUser, getUser } from './controllers/user';
 import { createBook, getBook } from './controllers/book';
@@ -47,7 +47,10 @@ routes.post('/user', [
     check('last_name').trim().escape().isAlphanumeric(),
 ], (req, res) => {
     try {
-        validateProcessableEntities(req, res);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
         createUser(req, res);
     } catch (exception) {
         standardExceptionResponse(res, exception);
@@ -91,7 +94,10 @@ routes.get('/user/:user_id', [
     check('user_id').trim().escape().isNumeric(),
 ], (req, res) => {
     try {
-        validateProcessableEntities(req, res);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
         getUser(req, res);
     } catch (exception) {
         standardExceptionResponse(res, exception);
@@ -134,7 +140,10 @@ routes.post('/book', [
     check('title').trim().escape().isString(),
 ], (req, res) => {
     try {
-        validateProcessableEntities(req, res);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
         createBook(req, res);
     } catch (exception) {
         standardExceptionResponse(res, exception);
@@ -176,7 +185,10 @@ routes.get('/book/:book_id', [
     check('book_id').trim().escape().isNumeric(),
 ], (req, res) => {
     try {
-        validateProcessableEntities(req, res);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
         getBook(req, res);
     } catch (exception) {
         standardExceptionResponse(res, exception);
@@ -212,7 +224,10 @@ routes.post('/addToLibrary', [
     check('book_id').trim().escape().isNumeric(),
 ], (req, res) => {
     try {
-        validateProcessableEntities(req, res);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
         addBookToUserLibrary(req, res);
     } catch (exception) {
         standardExceptionResponse(res, exception);
@@ -246,7 +261,10 @@ routes.put('/updateBookReadStatus/:user_library_id/operation/:mark_as_read', [
     check('mark_as_read').trim().escape().isBoolean(),
 ], (req, res) => {
     try {
-        validateProcessableEntities(req, res);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
         updateBookReadStatus(req, res);
     } catch (exception) {
         standardExceptionResponse(res, exception);
@@ -278,7 +296,10 @@ routes.delete('/deleteBookFromLibrary/:user_library_id', [
     check('user_library_id').trim().escape().isNumeric(),
 ], (req, res) => {
     try {
-        validateProcessableEntities(req, res);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
         deleteBookFromUserLibrary(req, res);
     } catch (exception) {
         standardExceptionResponse(res, exception);
@@ -327,7 +348,10 @@ routes.get('/getUserBooks/:user_id', [
     check('user_id').trim().escape().isNumeric(),
 ], (req, res) => {
     try {
-        validateProcessableEntities(req, res);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
         getUserBooks(req, res);
     } catch (exception) {
         standardExceptionResponse(res, exception);
