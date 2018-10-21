@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"first_name\": \"Maria$$$\",\n\t\"last_name\": \"Nelson\"\n}"
+							"raw": "{\n\t\"first_name\": \"Maria\",\n\t\"last_name\": \"Nelson\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3001/services/user",
