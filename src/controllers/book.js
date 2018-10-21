@@ -1,36 +1,36 @@
-import path from 'path';
-
-const dbPath = path.resolve(__dirname, '../../db/library.db');
-const sqlite3 = require('sqlite3').verbose();
-
-const db = new sqlite3.Database(dbPath);
-
-function getUser(userId) {
-    const sql = 'SELECT * FROM users WHERE user_id = ?';
-    db.get(sql, [userId], (err, row) => {
-        if (err) {
-            return console.error(err.message);
-        }
-        return row;
-    });
-}
+import queries from '../../db/queries.json';
+import messages from '../helpers/messages.json';
+import { standardErrorResponse, customErrorResponse } from '../helpers/libraryHelper';
 
 /**
- *
+ * Add a book our collection
  * @param {*} req
  * @param {*} res
  */
 export function createBook(req, res) {
-    const sql = 'INSERT INTO books values (?, ?, ?, ?, ?, ?)';
-    db.run(sql, [null, req.body.author, req.body.title, 0, 0, new Date().toUTCString()], (err) => {
+    db.run(queries.book.create, [null, req.body.author, req.body.title, new Date().toUTCString()], function(err) { // eslint-disable-line no-undef
         if (err) {
-            res.status(err.status || 500).send({ Error: err.message });
+            standardErrorResponse(res, err, err.message);
         } else {
-            res.status(202);
+            res.status(200).send({ book_id: this.lastID });
         }
         res.end();
     });
 }
 
-export function createUserwithPromise(req, res) {
+/**
+ * Get a book from the collection of books
+ * @param {*} req
+ * @param {*} res
+ */
+export function getBook(req, res) {
+    db.get(queries.book.get, [req.params.book_id], (err, result) => { // eslint-disable-line no-undef
+        if (err) {
+            standardErrorResponse(res, err, err.message);
+        } else if (result !== undefined) {
+            res.status(200).send({ result });
+        } else {
+            customErrorResponse(res, messages.failure.BOOK_NOT_FOUND);
+        }
+    });
 }

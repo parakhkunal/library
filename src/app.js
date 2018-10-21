@@ -2,7 +2,6 @@ import express from 'express';
 import winston from 'winston';
 import expressWinston from 'express-winston';
 import bodyParser from 'body-parser';
-import expressSanitizer from 'express-sanitizer';
 import routes from './routes';
 
 const app = express();
@@ -22,8 +21,6 @@ app.use(expressWinston.logger({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use(expressSanitizer());
 
 // Routes
 app.use('/services', routes);

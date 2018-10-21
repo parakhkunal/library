@@ -1,0 +1,14 @@
+{
+	"success": {
+		"RECORD_UPDATED": "Record successfully updated.",
+		"RECORD_DELETED": "Record successfully deleted."
+	},
+	"failure": {
+		"USER_NOT_FOUND": "No records found for the specified user.",
+		"BOOK_NOT_FOUND": "No records found for the specified book.",
+		"USER_OR_BOOK_NOT_FOUND": "User or Book not found.",
+		"BOOK_ALREADY_ISSUED": "The book is already issued to a user.",
+		"LIBRARY_ENTRY_NOT_FOUND": "Library entry not found.",
+		"NO_RECORDS_FOUND": "No Records found for the user in library."
+	}
+}

@@ -1,0 +1,22 @@
+{
+	"user": {
+		"create": "INSERT INTO users values (?, ?, ?, ?, ?)",
+		"get": "SELECT * FROM users WHERE user_id = ?",
+		"checkUserExists": "SELECT 1 FROM users WHERE user_id = ?"
+	},
+	"book": {
+		"create": "INSERT INTO books values (?, ?, ?, ?)",
+		"get": "SELECT * FROM books WHERE book_id = ?",
+		"checkBookExists": "SELECT 1 FROM books WHERE book_id = ?"
+	},
+	"library": {
+		"checkUserLibraryExists": "SELECT 1 FROM user_library WHERE user_library_id = ?",
+		"addBookToUserLibrary" : "INSERT INTO user_library values (?, ?, ?, ?, ?)",
+		"updateBookReadStatus": "UPDATE user_library SET is_read = ? WHERE user_library_id = ?",
+		"deleteBookFromUserLibrary": "DELETE FROM user_library WHERE user_library_id = ?",
+		"getUserReadBooks" : "SELECT books.book_id, books.author, books.title FROM books INNER JOIN user_library AS ul ON books.book_id = ul.book_id WHERE ul.user_id = ? and ul.is_read = 1",
+		"getUserUnreadBooks" : "SELECT books.book_id, books.author, books.title FROM books INNER JOIN user_library AS ul ON books.book_id = ul.book_id WHERE ul.user_id = ? and ul.is_read = 0",
+		"getUserBooksByAuthor" : "SELECT books.book_id, books.author, books.title FROM books INNER JOIN user_library AS ul ON books.book_id = ul.book_id WHERE ul.user_id = ? GROUP BY books.author",
+		"getAllUserBooks" : "SELECT books.book_id, books.author, books.title FROM books INNER JOIN user_library AS ul ON books.book_id = ul.book_id WHERE ul.user_id = ?"
+	}
+}
