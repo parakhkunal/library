@@ -1,3 +1,4 @@
+import groupBy from 'lodash.groupby';
 import queries from '../../db/queries.json';
 
 /**
@@ -8,23 +9,38 @@ import queries from '../../db/queries.json';
  */
 export function doesEntryExist(id, schema, callback) {
     let isFound = false;
-    let sql = '';
-    switch (schema) {
-        case 'user':
-            sql = queries.user.checkUserExists;
-            break;
-        case 'book':
-            sql = queries.book.checkBookExists;
-            break;
-        default:
-            sql = queries.library.checkUserLibraryExists;
-    }
+    const sql = schema === 'user' ? queries.user.checkUserExists : queries.book.checkBookExists;
     db.get(sql, [id], (err, row) => { // eslint-disable-line no-undef
         if (!err && row !== undefined) {
             isFound = true;
         }
         callback(isFound);
     });
+}
+
+/**
+ * Helper function to check whether record exists in the library for the specified user and book id combination or not
+ * @param {number} userId - Lookup user_id for the library table
+ * @param {number} bookId - Lookup book_id for the library table
+ * @callback {*} callback
+ */
+export function doesLibraryEntryExist(userId, bookId, callback) {
+    let isFound = false;
+    db.get(queries.library.checkUserLibraryExists, [userId, bookId], (err, row) => { // eslint-disable-line no-undef
+        if (!err && row !== undefined) {
+            isFound = true;
+        }
+        callback(isFound);
+    });
+}
+
+/**
+ * Helper function to group elements of array by key using groupBy
+ * @param {array} response - Input array to be grouped
+ * @param {*} key - groupping key
+ */
+export function groupResponseByKey(response, key) {
+    return groupBy(response, key);
 }
 
 /**

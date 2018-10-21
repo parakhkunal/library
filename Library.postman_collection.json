@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"first_name\": \"Maria\",\n\t\"last_name\": \"Nelson\"\n}"
+							"raw": "{\n\t\"first_name\": \"Jasmin\",\n\t\"last_name\": \"White\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3001/services/user",
@@ -50,7 +50,7 @@
 							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3001/services/user/466",
+							"raw": "http://localhost:3001/services/user/65",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -59,7 +59,7 @@
 							"path": [
 								"services",
 								"user",
-								"466"
+								"65"
 							]
 						},
 						"description": "Get User Details"
@@ -145,20 +145,13 @@
 					"name": "Add Book to User's Library",
 					"request": {
 						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"book_id\": 16,\n\t\"user_id\": 44\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:3001/services/addToLibrary",
+							"raw": "http://localhost:3001/services/user/60/book/17",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -166,7 +159,10 @@
 							"port": "3001",
 							"path": [
 								"services",
-								"addToLibrary"
+								"user",
+								"60",
+								"book",
+								"17"
 							]
 						},
 						"description": "Create a map of book and user"
@@ -180,7 +176,7 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "http://localhost:3001/services/updateBookReadStatus/111/operation/1",
+							"raw": "http://localhost:3001/services/user/43/book/3/operation/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -188,8 +184,10 @@
 							"port": "3001",
 							"path": [
 								"services",
-								"updateBookReadStatus",
-								"111",
+								"user",
+								"43",
+								"book",
+								"3",
 								"operation",
 								"1"
 							]
@@ -208,7 +206,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:3001/services/deleteBookFromLibrary/11",
+							"raw": "http://localhost:3001/services/user/43/book/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -216,8 +214,10 @@
 							"port": "3001",
 							"path": [
 								"services",
-								"deleteBookFromLibrary",
-								"11"
+								"user",
+								"43",
+								"book",
+								"3"
 							]
 						},
 						"description": "Delete a book from user's library"
@@ -241,7 +241,7 @@
 							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3001/services/getUserBooks/44",
+							"raw": "http://localhost:3001/services/user/44/books",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -249,8 +249,9 @@
 							"port": "3001",
 							"path": [
 								"services",
-								"getUserBooks",
-								"44"
+								"user",
+								"44",
+								"books"
 							]
 						},
 						"description": "Get all the books from a user's library"
@@ -274,7 +275,7 @@
 							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3001/services/getUserBooks/44?filter=unread",
+							"raw": "http://localhost:3001/services/user/44/books?filter=unread",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -282,8 +283,9 @@
 							"port": "3001",
 							"path": [
 								"services",
-								"getUserBooks",
-								"44"
+								"user",
+								"44",
+								"books"
 							],
 							"query": [
 								{
@@ -313,7 +315,7 @@
 							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3001/services/getUserBooks/44?filter=read",
+							"raw": "http://localhost:3001/services/user/44/books?filter=read",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -321,8 +323,9 @@
 							"port": "3001",
 							"path": [
 								"services",
-								"getUserBooks",
-								"44"
+								"user",
+								"44",
+								"books"
 							],
 							"query": [
 								{
@@ -352,7 +355,7 @@
 							"raw": "{\n\t\"book_id\": 2,\n\t\"user_id\": 123\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3001/services/getUserBooks/44?filter=author",
+							"raw": "http://localhost:3001/services/user/44/books?filter=author",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -360,8 +363,9 @@
 							"port": "3001",
 							"path": [
 								"services",
-								"getUserBooks",
-								"44"
+								"user",
+								"44",
+								"books"
 							],
 							"query": [
 								{

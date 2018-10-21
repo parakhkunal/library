@@ -11,8 +11,10 @@ import { standardErrorResponse, customErrorResponse } from '../helpers/libraryHe
 export function createUser(req, res) {
     db.run(queries.user.create, [null, uniqid(), req.body.first_name, req.body.last_name, new Date().toUTCString()], function(err) { // eslint-disable-line no-undef
         if (err) {
+            console.log("err", err);
             standardErrorResponse(res, err, err.message);
         } else {
+            console.log("200");
             res.status(200).send({ user_id: this.lastID });
         }
         res.end();

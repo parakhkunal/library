@@ -22,6 +22,10 @@ app.use(expressWinston.logger({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.get('/ping', (req, res) => {
+    res.send('pong');
+});
+
 // Routes
 app.use('/services', routes);
 

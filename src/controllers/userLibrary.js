@@ -1,6 +1,8 @@
 import queries from '../../db/queries.json';
 import messages from '../helpers/messages.json';
-import { doesEntryExist, standardErrorResponse, customErrorResponse } from '../helpers/libraryHelper';
+import {
+    doesEntryExist, doesLibraryEntryExist, standardErrorResponse, customErrorResponse, groupResponseByKey
+} from '../helpers/libraryHelper';
 
 /**
  * Add a book to the user's library
@@ -10,14 +12,14 @@ import { doesEntryExist, standardErrorResponse, customErrorResponse } from '../h
 export function addBookToUserLibrary(req, res) {
     let isUserFound,
         isBookFound = false;
-    doesEntryExist(req.body.user_id, 'user', (data) => {
+    doesEntryExist(req.params.user_id, 'user', (data) => {
         isUserFound = data;
     });
 
-    doesEntryExist(req.body.book_id, 'book', (data) => {
+    doesEntryExist(req.params.book_id, 'book', (data) => {
         isBookFound = data;
         if (isUserFound && isBookFound) {
-            db.run(queries.library.addBookToUserLibrary, [null, req.body.user_id, req.body.book_id, 0, new Date().toUTCString()], function(err) { // eslint-disable-line no-undef
+            db.run(queries.library.addBookToUserLibrary, [null, req.params.user_id, req.params.book_id, 0, new Date().toUTCString()], function(err) { // eslint-disable-line no-undef
                 if (err) {
                     let errorMessage = '';
                     switch (err.errno) {
@@ -45,9 +47,9 @@ export function addBookToUserLibrary(req, res) {
  * @param {*} res
  */
 export function updateBookReadStatus(req, res) {
-    doesEntryExist(req.params.user_library_id, 'user_library', (data) => {
+    doesLibraryEntryExist(req.params.user_id, req.params.book_id, (data) => {
         if (data) {
-            db.run(queries.library.updateBookReadStatus, [req.params.mark_as_read, req.params.user_library_id], (err) => { // eslint-disable-line no-undef
+            db.run(queries.library.updateBookReadStatus, [req.params.mark_as_read, req.params.user_id, req.params.book_id], (err) => { // eslint-disable-line no-undef
                 if (err) {
                     standardErrorResponse(res, err, err.message);
                 } else {
@@ -62,14 +64,14 @@ export function updateBookReadStatus(req, res) {
 }
 
 /**
- * Delete a book from user's library
+ * Delete a book from user's library. Use a combination of user id and book id for a safe delete instead of deleting by primary key
  * @param {*} req
  * @param {*} res
  */
 export function deleteBookFromUserLibrary(req, res) {
-    doesEntryExist(req.params.user_library_id, 'user_library', (data) => {
+    doesLibraryEntryExist(req.params.user_id, req.params.book_id, (data) => {
         if (data) {
-            db.run(queries.library.deleteBookFromUserLibrary, [req.params.user_library_id], (err) => { // eslint-disable-line no-undef
+            db.run(queries.library.deleteBookFromUserLibrary, [req.params.user_id, req.params.book_id], (err) => { // eslint-disable-line no-undef
                 if (err) {
                     standardErrorResponse(res, err, err.message);
                 } else {
@@ -99,18 +101,18 @@ export function getUserBooks(req, res) {
             case 'unread':
                 sql = queries.library.getUserUnreadBooks;
                 break;
-            case 'author':
-                sql = queries.library.getUserBooksByAuthor;
-                break;
             default:
                 sql = queries.library.getAllUserBooks;
         }
     }
-    db.all(sql, [req.params.user_id], (err, results) => { // eslint-disable-line no-undef
+    db.all(sql, [req.params.user_id], (err, books) => { // eslint-disable-line no-undef
         if (err) {
             standardErrorResponse(res, err, err.message);
-        } else if (results.length) {
-            res.status(200).send({ results });
+        } else if (books.length) {
+            if (filter === 'author') {
+                books = groupResponseByKey(books, 'author');
+            }
+            res.status(200).send({ books });
         } else {
             customErrorResponse(res, messages.failure.NO_RECORDS_FOUND);
         }
