@@ -45,6 +45,9 @@ A simple Node Library API with SQLite DB.
 1.  SQlite DB is used for this project as a lightweight file based database. (https://www.sqlite.org/index.html)
 
 2.  Relationship Diagram of the tables supporting the project -
+    
+        https://github.com/parakhkunal/library/blob/master/library_relationship_diagram.png
+      
 
 ## Functionalities Supported:
 
@@ -55,5 +58,5 @@ A simple Node Library API with SQLite DB.
 5.  Add a book to user's library
 6.  Mark a book from user's library as read or unread
 7.  Delete a book from user's library
-8.  Get all the books from user's library with filter like read, unread books and by authors
+8.  Get all the books from user's library with filters like read, unread books and by authors
 
